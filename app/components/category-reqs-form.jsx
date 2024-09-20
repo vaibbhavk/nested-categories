@@ -54,6 +54,23 @@ const CategoryRequirementsForm = ({
     setData(updatedData);
   };
 
+  const removeRequirement = (e, catId, reqId) => {
+    const updatedData = data.map((category) => {
+      if (category.c_id == catId) {
+        return {
+          ...category,
+          requirements: category.requirements.filter(
+            (req) => req.req_id != reqId
+          ),
+        };
+      }
+
+      return category;
+    });
+
+    setData(updatedData);
+  };
+
   return (
     <div className="bg-white rounded-md px-8 py-4">
       <div className="space-y-4 flex flex-col">
@@ -72,8 +89,9 @@ const CategoryRequirementsForm = ({
             <RequirementForm
               r={r}
               key={index}
-              handleRequirementChange={handleRequirementChange}
               catId={cat.c_id}
+              handleRequirementChange={handleRequirementChange}
+              removeRequirement={removeRequirement}
             />
           ))}
         </div>

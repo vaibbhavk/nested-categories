@@ -1,6 +1,11 @@
 "use client";
 
-const RequirementForm = ({ r, handleRequirementChange, catId }) => {
+const RequirementForm = ({
+  r,
+  handleRequirementChange,
+  catId,
+  removeRequirement,
+}) => {
   return (
     <div className="p-3 border border-black rounded-md mb-3 flex gap-6">
       <p className="font-semibold">Requirement</p>
@@ -11,6 +16,7 @@ const RequirementForm = ({ r, handleRequirementChange, catId }) => {
         onChange={(e) => handleRequirementChange(e, catId, r.req_id)}
         className="border border-gray-500 rounded-md px-2"
       />
+      <button onClick={(e) => removeRequirement(e, catId, r.req_id)}>❌</button>
     </div>
   );
 };
