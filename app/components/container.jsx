@@ -59,6 +59,25 @@ const AppContainer = () => {
     setData(updatedData);
   };
 
+  const exportData = async () => {
+    try {
+      const response = await fetch("/api/export", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        console.log("success!");
+      } else {
+        console.error("failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <div className="grid grid-cols-12 px-16 py-12 gap-16">
       <div className="col-span-8 space-y-6 flex flex-col">
@@ -81,10 +100,7 @@ const AppContainer = () => {
             {data.map((cat, index) => (
               <CategoryRequirements cat={cat} key={index} />
             ))}
-            <Button
-              text="Export"
-              onClick={() => console.log(JSON.stringify(data, null, 2))}
-            />
+            <Button text="Export" onClick={exportData} />
           </>
         ) : (
           <p>Your categories will appear here.</p>
