@@ -56,8 +56,6 @@ const AppContainer = () => {
       return category;
     });
 
-    console.log(updatedData);
-
     setData(updatedData);
   };
 
@@ -69,6 +67,8 @@ const AppContainer = () => {
             cat={cat}
             key={index}
             handleCategoryChange={handleCategoryChange}
+            data={data}
+            setData={setData}
           />
         ))}
 
@@ -81,7 +81,10 @@ const AppContainer = () => {
             {data.map((cat, index) => (
               <CategoryRequirements cat={cat} key={index} />
             ))}
-            <Button text="Export" onClick={() => alert("Export")} />
+            <Button
+              text="Export"
+              onClick={() => console.log(JSON.stringify(data, null, 2))}
+            />
           </>
         ) : (
           <p>Your categories will appear here.</p>
